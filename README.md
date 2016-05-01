@@ -13,6 +13,13 @@ Languages
  - Clojure
  - Java
 
+Running
+-------
+
+There is no application, just unit tests. You can run them using Maven:
+
+    mvn test
+    
 License
 -------
 
