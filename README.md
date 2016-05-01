@@ -4,7 +4,7 @@ JVM Exercises
 This repository contains exercises I'm doing
 with JVM based languages.
 
-The goal is to implement as much different algorithms
+The goal is to implement as many different algorithms
 as possible.
 
 Languages
@@ -19,7 +19,7 @@ Running
 There is no application, just unit tests. You can run them using Maven:
 
     mvn test
-    
+
 License
 -------
 
