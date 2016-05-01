@@ -5,7 +5,7 @@
 
 (defn insert [sorted x]
   (let [[smaller-than-x bigger-than-x] (split-with (partial > x) sorted)]
-    (concat smaller-than-x (list x) bigger-than-x)))
+    (concat smaller-than-x (cons x bigger-than-x))))
 
 (defn insertion-sort [numbers] (reduce insert '() numbers))
 
