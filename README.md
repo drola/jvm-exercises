@@ -1,6 +1,8 @@
 JVM Exercises
 =============
 
+![Build status](https://travis-ci.org/drola/jvm-exercises.svg?branch=master)
+
 This repository contains exercises I'm doing
 with JVM based languages.
 
