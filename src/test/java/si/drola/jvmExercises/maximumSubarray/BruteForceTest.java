@@ -11,6 +11,21 @@ public class BruteForceTest {
         MaximumSubarrayResult expectedResult = new MaximumSubarrayResult(0, input.length, 15);
         MaximumSubarrayResult actualResult = (new BruteForce()).findMaximumSubarray(input);
 
+        assertMaxximumSubarrayResultEqual(expectedResult, actualResult);
+    }
+
+    @Test
+    public void findMaximumSubarrayNegativeIntegers() throws Exception {
+        int[] input = new int[]{-1,-2,-3,-4,-5};
+        MaximumSubarrayResult expectedResult = new MaximumSubarrayResult(0, 0, 0);
+        MaximumSubarrayResult actualResult = (new BruteForce()).findMaximumSubarray(input);
+
+        assertMaxximumSubarrayResultEqual(expectedResult, actualResult);
+    }
+
+
+
+    protected void assertMaxximumSubarrayResultEqual(MaximumSubarrayResult expectedResult, MaximumSubarrayResult actualResult) {
         assertEquals(expectedResult.startIndex, actualResult.startIndex);
         assertEquals(expectedResult.endIndex, actualResult.endIndex);
         assertEquals(expectedResult.sum, actualResult.sum);
