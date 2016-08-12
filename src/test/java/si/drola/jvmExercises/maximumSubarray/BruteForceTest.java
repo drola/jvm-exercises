@@ -23,6 +23,15 @@ public class BruteForceTest {
         assertMaxximumSubarrayResultEqual(expectedResult, actualResult);
     }
 
+    @Test
+    public void findMaximumSubarrayNegativeAndPositiveIntegers() throws Exception {
+        int[] input = new int[]{-1,-2,-3,-4,-5, 1, 2, 3};
+        MaximumSubarrayResult expectedResult = new MaximumSubarrayResult(5, 8, 6);
+        MaximumSubarrayResult actualResult = (new BruteForce()).findMaximumSubarray(input);
+
+        assertMaxximumSubarrayResultEqual(expectedResult, actualResult);
+    }
+
 
 
     protected void assertMaxximumSubarrayResultEqual(MaximumSubarrayResult expectedResult, MaximumSubarrayResult actualResult) {
