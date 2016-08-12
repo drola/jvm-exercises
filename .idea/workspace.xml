@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e90caab5-a7e2-4602-af54-1ddb26ff0c6f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/BruteForce.java" afterPath="$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/BruteForce.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="jvm-exercises.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,12 +58,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <first_editor relative-caret-position="300">
+                <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -85,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BruteForce.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BruteForce.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/BruteForce.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+            <state relative-caret-position="360">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -185,13 +184,13 @@
         <option value="$PROJECT_DIR$/src/main/clojure/si/drola/jvmExercises/sorting.clj" />
         <option value="$PROJECT_DIR$/src/test/java/si/drola/jvmExercises/sorting/CljInsertionSortTest.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/MaximumSubarrayResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/IMaximumSubarray.java" />
         <option value="$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/DivideAndConquer.java" />
         <option value="$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/LinearAlgorithm.java" />
         <option value="$PROJECT_DIR$/src/test/java/si/drola/jvmExercises/maximumSubarray/BruteForceTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/BruteForce.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -1032,7 +1031,7 @@
       <workItem from="1463769221319" duration="599000" />
       <workItem from="1470722296303" duration="2001000" />
       <workItem from="1470989084528" duration="465000" />
-      <workItem from="1471004955507" duration="324000" />
+      <workItem from="1471004955507" duration="557000" />
     </task>
     <task id="LOCAL-00001" summary="Added stubs for Maximum subarray problem">
       <created>1470723617386</created>
@@ -1041,7 +1040,14 @@
       <option name="project" value="LOCAL" />
       <updated>1470723617386</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Optimized summation in brute force method for finding maximmum subarray">
+      <created>1471005316808</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1471005316808</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1077,7 +1083,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35021000" />
+    <option name="totallyTimeSpent" value="35254000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1358" height="1176" extended-state="4" />
@@ -1125,7 +1131,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added stubs for Maximum subarray problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added stubs for Maximum subarray problem" />
+    <MESSAGE value="Optimized summation in brute force method for finding maximmum subarray" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimized summation in brute force method for finding maximmum subarray" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1341,26 +1348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/IMaximumSubarray.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1432,8 +1419,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/si/drola/jvmExercises/maximumSubarray/BruteForce.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+        <state relative-caret-position="360">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="300">
+            <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
