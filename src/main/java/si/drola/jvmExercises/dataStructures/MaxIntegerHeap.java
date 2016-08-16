@@ -1,6 +1,15 @@
 package si.drola.jvmExercises.dataStructures;
 
 public class MaxIntegerHeap extends Heap<Integer> {
+
+    public MaxIntegerHeap(Integer[] A) {
+        heapSize = A.length;
+        this.A = A;
+        for(int i = (int)(Math.floor(heapSize/2)) - 1; i >= 0; i--) {
+            maxHeapifyIterative(i);
+        }
+    }
+
     public void maxHeapifyRecursive(int i) {
         int l = left(i);
         int r = right(i);

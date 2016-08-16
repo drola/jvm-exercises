@@ -1,8 +1,8 @@
 package si.drola.jvmExercises.dataStructures;
 
 public class Heap<T> {
-    protected T[] A;
-    protected int heapSize;
+    public T[] A;
+    public int heapSize;
 
     public int left(int i) {
         return 2*i + 1;
