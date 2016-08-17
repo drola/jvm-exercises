@@ -6,7 +6,7 @@ import si.drola.jvmExercises.dataStructures.MaxIntegerHeap;
 public class HeapSort implements ISorter {
 
     public int[] sort(int[] numbers) {
-        MaxIntegerHeap heap = new MaxIntegerHeap(ArrayUtils.toObject(numbers));
+        MaxIntegerHeap heap = new MaxIntegerHeap(numbers);
         for(int i = heap.A.length - 1; i >= 1; i--) {
             Integer t = heap.A[i];
             heap.A[i] = heap.A[0];
@@ -15,6 +15,6 @@ public class HeapSort implements ISorter {
             heap.maxHeapifyIterative(0);
         }
 
-        return ArrayUtils.toPrimitive(heap.A);
+        return heap.A;
     }
 }

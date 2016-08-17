@@ -1,8 +1,9 @@
 package si.drola.jvmExercises.dataStructures;
 
-public class MaxIntegerHeap extends Heap<Integer> {
+public class MaxIntegerHeap extends Heap {
+    public int[] A;
 
-    public MaxIntegerHeap(Integer[] A) {
+    public MaxIntegerHeap(int[] A) {
         heapSize = A.length;
         this.A = A;
         for(int i = (int)(Math.floor(heapSize/2)) - 1; i >= 0; i--) {
@@ -14,10 +15,10 @@ public class MaxIntegerHeap extends Heap<Integer> {
         int l = left(i);
         int r = right(i);
         int largest = i;
-        if(l < heapSize && A[l].compareTo(A[largest]) > 0) {
+        if(l < heapSize && A[l] > A[largest]) {
             largest = l;
         }
-        if(r < heapSize && A[r].compareTo(A[largest]) > 0) {
+        if(r < heapSize && A[r] > A[largest]) {
             largest = r;
         }
         if (largest != i) {
@@ -34,10 +35,10 @@ public class MaxIntegerHeap extends Heap<Integer> {
             int largest = i;
             int l = left(i);
             int r = right(i);
-            if(l < heapSize && A[l].compareTo(A[largest]) > 0) {
+            if(l < heapSize && A[l] > A[largest]) {
                 largest = l;
             }
-            if(r < heapSize && A[r].compareTo(A[largest]) > 0) {
+            if(r < heapSize && A[r] > A[largest]) {
                 largest = r;
             }
 
