@@ -11,6 +11,44 @@ import static org.junit.Assert.*;
 
 public class BinarySearchTreeTest {
     @Test
+    public void predecessor() throws Exception {
+        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1, null, null);
+        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5, null, null);
+        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16, null, null);
+        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21, null, null);
+        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
+        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
+        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
+
+        assertEquals(null, BinarySearchTree.predecessor(n1));
+        assertEquals(n1, BinarySearchTree.predecessor(n4));
+        assertEquals(n4, BinarySearchTree.predecessor(n5));
+        assertEquals(n5, BinarySearchTree.predecessor(n10));
+        assertEquals(n10, BinarySearchTree.predecessor(n16));
+        assertEquals(n16, BinarySearchTree.predecessor(n17));
+        assertEquals(n17, BinarySearchTree.predecessor(n21));
+    }
+
+    @Test
+    public void successor() throws Exception {
+        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1, null, null);
+        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5, null, null);
+        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16, null, null);
+        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21, null, null);
+        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
+        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
+        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
+
+        assertEquals(n4, BinarySearchTree.successor(n1));
+        assertEquals(n5, BinarySearchTree.successor(n4));
+        assertEquals(n10, BinarySearchTree.successor(n5));
+        assertEquals(n16, BinarySearchTree.successor(n10));
+        assertEquals(n17, BinarySearchTree.successor(n16));
+        assertEquals(n21, BinarySearchTree.successor(n17));
+        assertEquals(null, BinarySearchTree.successor(n21));
+    }
+
+    @Test
     public void min() throws Exception {
         BinarySearchTree.Node n1 = new BinarySearchTree.Node(1, null, null);
         BinarySearchTree.Node n5 = new BinarySearchTree.Node(5, null, null);

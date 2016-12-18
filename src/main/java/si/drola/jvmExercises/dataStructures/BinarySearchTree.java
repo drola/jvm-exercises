@@ -23,6 +23,10 @@ public class BinarySearchTree {
                 this.right.parent = this;
             }
         }
+
+        public String toString() {
+            return Integer.toString(val);
+        }
     }
 
     Node root;
@@ -89,5 +93,27 @@ public class BinarySearchTree {
 
     public Node max() {
         return BinarySearchTree.max(this.root);
+    }
+
+    public static Node successor(Node node) {
+        if(node.right != null) {
+            return BinarySearchTree.min(node.right);
+        }
+        while (node.parent != null && node.parent.right == node ) {
+            node = node.parent;
+        }
+
+        return node.parent;
+    }
+
+    public static Node predecessor(Node node) {
+        if(node.left != null) {
+            return BinarySearchTree.max(node.left);
+        }
+
+        while(node.parent != null && node.parent.left == node) {
+            node = node.parent;
+        }
+        return node.parent;
     }
 }
