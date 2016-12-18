@@ -1,5 +1,6 @@
 package si.drola.jvmExercises.dataStructures;
 
+import javax.swing.tree.TreeNode;
 import java.util.function.Consumer;
 
 public class BinarySearchTree {
@@ -54,5 +55,17 @@ public class BinarySearchTree {
                 }
             }
         }
+    }
+
+    public Node search(int key) {
+        Node node = this.root;
+        while (node != null && node.val != key) {
+            if(key > node.val) {
+                node = node.right;
+            } else {
+                node = node.left;
+            }
+        }
+        return node;
     }
 }
