@@ -68,4 +68,26 @@ public class BinarySearchTree {
         }
         return node;
     }
+
+    public static Node min(Node node) {
+        while (node != null && node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    public static Node max(Node node) {
+        while (node != null && node.right != null) {
+            node = node.right;
+        }
+        return node;
+    }
+
+    public Node min() {
+        return BinarySearchTree.min(this.root);
+    }
+
+    public Node max() {
+        return BinarySearchTree.max(this.root);
+    }
 }
