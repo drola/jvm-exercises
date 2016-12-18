@@ -1,6 +1,5 @@
 package si.drola.jvmExercises.dataStructures;
 
-import com.sun.org.apache.regexp.internal.RE;
 
 public class RedBlackTree {
     public RedBlackNode root;
