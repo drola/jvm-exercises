@@ -145,4 +145,29 @@ public class BinarySearchTree {
             }
         }
     }
+
+    protected void transplant(Node target, Node newNode) {
+        newNode.parent = target.parent;
+        if(target.parent == null) {
+            this.root = newNode;
+        } else if(target.parent.left == target) {
+            target.parent.left = newNode;
+            target.parent = newNode;
+        } else if(target.parent.right == target) {
+            target.parent.right = newNode;
+            target.parent = newNode;
+        }
+    }
+
+    public void delete(Node x) {
+        if (x.left == null && x.right == null) {
+            transplant(x, null);
+        } else if(x.left != null && x.right != null) {
+            //TODO
+        } else if(x.left != null) {
+            transplant(x, x.left);
+        } else if(x.right != null) {
+            transplant(x, x.right);
+        }
+    }
 }
