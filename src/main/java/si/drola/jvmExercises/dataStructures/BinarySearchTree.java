@@ -116,4 +116,33 @@ public class BinarySearchTree {
         }
         return node.parent;
     }
+
+    public void insert(Node x) {
+        if (this.root == null) {
+            this.root = x;
+            x.parent = null;
+            return;
+        }
+
+        Node y = this.root;
+        while (true) {
+            if (x.val >= y.val) {
+                if (y.right == null) {
+                    y.right = x;
+                    x.parent = y;
+                    return;
+                } else {
+                    y = y.right;
+                }
+            } else {
+                if (y.left == null) {
+                    y.left = x;
+                    x.parent = y;
+                    return;
+                } else {
+                    y = y.left;
+                }
+            }
+        }
+    }
 }

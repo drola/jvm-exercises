@@ -11,6 +11,28 @@ import static org.junit.Assert.*;
 
 public class BinarySearchTreeTest {
     @Test
+    public void insert() throws Exception {
+        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1, null, null);
+        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5, null, null);
+        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16, null, null);
+        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21, null, null);
+        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
+        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
+        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
+        BinarySearchTree t = new BinarySearchTree(n10);
+
+        BinarySearchTree.Node n22 = new BinarySearchTree.Node(22, null, null);
+        t.insert(n22);
+        assertEquals(n21, n22.parent);
+        assertTrue(n21.right == n22);
+
+        BinarySearchTree.Node n6 = new BinarySearchTree.Node(6, null, null);
+        t.insert(n6);
+        assertEquals(n5, n6.parent);
+        assertTrue(n5.right == n6);
+    }
+
+    @Test
     public void predecessor() throws Exception {
         BinarySearchTree.Node n1 = new BinarySearchTree.Node(1, null, null);
         BinarySearchTree.Node n5 = new BinarySearchTree.Node(5, null, null);
