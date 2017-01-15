@@ -1,6 +1,5 @@
 package si.drola.jvmExercises.dataStructures;
 
-import javax.swing.tree.TreeNode;
 import java.util.function.Consumer;
 
 public class BinarySearchTree {
@@ -147,15 +146,15 @@ public class BinarySearchTree {
     }
 
     protected void transplant(Node target, Node newNode) {
-        newNode.parent = target.parent;
+        if(newNode != null) {
+            newNode.parent = target.parent;
+        }
         if(target.parent == null) {
             this.root = newNode;
         } else if(target.parent.left == target) {
             target.parent.left = newNode;
-            target.parent = newNode;
         } else if(target.parent.right == target) {
             target.parent.right = newNode;
-            target.parent = newNode;
         }
     }
 
@@ -163,7 +162,19 @@ public class BinarySearchTree {
         if (x.left == null && x.right == null) {
             transplant(x, null);
         } else if(x.left != null && x.right != null) {
-            //TODO
+            Node succ = BinarySearchTree.successor(x);
+            if (x.right == succ) {
+                x.left.parent = x.right;
+                x.right.left = x.left;
+                transplant(x, x.right);
+            } else {
+                succ.left = x.left;
+                succ.left.parent = succ;
+                transplant(succ, succ.right);
+                succ.right = x.right;
+                succ.right.parent = succ;
+                transplant(x, succ);
+            }
         } else if(x.left != null) {
             transplant(x, x.left);
         } else if(x.right != null) {
