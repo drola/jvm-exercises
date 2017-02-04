@@ -16,9 +16,9 @@ import static org.junit.Assert.assertTrue;
 public class BinarySearchTreePropertiesTest {
     @Property
     public void validateCreation(int[] nodeValues) {
-        BinarySearchTree bst = new BinarySearchTree(null);
+        BinarySearchTree bst = new BinarySearchTree();
         for (int i = 0; i < nodeValues.length; i++) {
-            bst.insert(new BinarySearchTree.Node(nodeValues[i], null, null));
+            bst.insert(new BinarySearchTree.Node(nodeValues[i]));
         }
 
         Arrays.sort(nodeValues);
@@ -35,10 +35,10 @@ public class BinarySearchTreePropertiesTest {
         }
 
 
-        BinarySearchTree bst = new BinarySearchTree(null);
+        BinarySearchTree bst = new BinarySearchTree();
         BinarySearchTree.Node last = null;
         for (int i = 0; i < nodeValues.length; i++) {
-            last = new BinarySearchTree.Node(nodeValues[i], null, null);
+            last = new BinarySearchTree.Node(nodeValues[i]);
             bst.insert(last);
         }
 
@@ -52,7 +52,7 @@ public class BinarySearchTreePropertiesTest {
     }
 
     public static void assertBstWithValues(int[] expectedValues, BinarySearchTree t) {
-        if(t.root == null && expectedValues.length == 0) {
+        if(t.root.isNil && expectedValues.length == 0) {
             assertTrue(true);
             return;
         }
@@ -68,17 +68,17 @@ public class BinarySearchTreePropertiesTest {
     }
 
     public static void assertValidBst(BinarySearchTree t) {
-        if (t.root == null) {
+        if (t.root.isNil) {
             assertTrue(true);
             return;
         }
 
         t.walkInOrder((BinarySearchTree.Node node) -> {
-            if(node.left != null) {
+            if(!node.left.isNil) {
                 assertEquals(node.left.parent, node);
                 assertTrue(node.left.val <= node.val);
             }
-            if(node.right != null) {
+            if(!node.right.isNil) {
                 assertEquals(node.right.parent, node);
                 assertTrue(node.right.val >= node.val);
             }

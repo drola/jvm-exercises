@@ -8,19 +8,24 @@ public class BinarySearchTree {
         public Node right;
         public Node parent;
         public int val;
+        public boolean isNil;
 
         public Node(int val, Node left, Node right) {
             this.val = val;
             this.left = left;
             this.right = right;
+            this.isNil = false;
 
-            if (left != null) {
-                this.left.parent = this;
-            }
+            this.left.parent = this;
+            this.right.parent = this;
+        }
 
-            if (right != null) {
-                this.right.parent = this;
-            }
+        public Node(int val) {
+            this(val, new Node(), new Node());
+        }
+
+        public Node() {
+            this.isNil = true;
         }
 
         public String toString() {
@@ -34,23 +39,27 @@ public class BinarySearchTree {
         this.root = root;
     }
 
+    public BinarySearchTree() {
+        this.root = new Node();
+    }
+
     public void walkInOrder(Consumer<Node> c) {
         Node node = this.root;
 
         //Find minimum
-        while(node.left != null && node != null) {
+        while(!node.isNil && !node.left.isNil) {
             node = node.left;
         }
-        if(node != null) {
+        if(!node.isNil) {
             c.accept(node);
         }
 
         //Now iterate over all successors
-        while(node != null) {
-            if(node.right != null) {
+        while(node != null && !node.isNil) {
+            if(!node.right.isNil) {
                 //Minimum of node.right
                 node = node.right;
-                while(node.left != null) {
+                while(!node.left.isNil) {
                     node = node.left;
                 }
                 c.accept(node);
@@ -70,25 +79,25 @@ public class BinarySearchTree {
 
     public Node search(int key) {
         Node node = this.root;
-        while (node != null && node.val != key) {
+        while (!node.isNil && node.val != key) {
             if(key > node.val) {
                 node = node.right;
             } else {
                 node = node.left;
             }
         }
-        return node;
+        return node.isNil ? null : node;
     }
 
     public static Node min(Node node) {
-        while (node != null && node.left != null) {
+        while (!node.isNil && !node.left.isNil) {
             node = node.left;
         }
         return node;
     }
 
     public static Node max(Node node) {
-        while (node != null && node.right != null) {
+        while (!node.isNil && !node.right.isNil) {
             node = node.right;
         }
         return node;
@@ -103,7 +112,7 @@ public class BinarySearchTree {
     }
 
     public static Node successor(Node node) {
-        if(node.right != null) {
+        if(!node.right.isNil) {
             return BinarySearchTree.min(node.right);
         }
         while (node.parent != null && node.parent.right == node ) {
@@ -114,7 +123,7 @@ public class BinarySearchTree {
     }
 
     public static Node predecessor(Node node) {
-        if(node.left != null) {
+        if(!node.left.isNil) {
             return BinarySearchTree.max(node.left);
         }
 
@@ -125,7 +134,7 @@ public class BinarySearchTree {
     }
 
     public void insert(Node x) {
-        if (this.root == null) {
+        if (this.root.isNil) {
             this.root = x;
             x.parent = null;
             return;
@@ -134,7 +143,7 @@ public class BinarySearchTree {
         Node y = this.root;
         while (true) {
             if (x.val >= y.val) {
-                if (y.right == null) {
+                if (y.right.isNil) {
                     y.right = x;
                     x.parent = y;
                     return;
@@ -142,7 +151,7 @@ public class BinarySearchTree {
                     y = y.right;
                 }
             } else {
-                if (y.left == null) {
+                if (y.left.isNil) {
                     y.left = x;
                     x.parent = y;
                     return;
@@ -154,9 +163,8 @@ public class BinarySearchTree {
     }
 
     protected void transplant(Node target, Node newNode) {
-        if(newNode != null) {
-            newNode.parent = target.parent;
-        }
+        newNode.parent = target.parent;
+
         if(target.parent == null) {
             this.root = newNode;
         } else if(target.parent.left == target) {
@@ -167,9 +175,9 @@ public class BinarySearchTree {
     }
 
     public void delete(Node x) {
-        if (x.left == null && x.right == null) {
-            transplant(x, null);
-        } else if(x.left != null && x.right != null) {
+        if (x.left.isNil && x.right.isNil) {
+            transplant(x, new Node());
+        } else if(!x.left.isNil && !x.right.isNil) {
             Node succ = BinarySearchTree.successor(x);
             if (x.right == succ) {
                 x.left.parent = x.right;
@@ -183,9 +191,9 @@ public class BinarySearchTree {
                 succ.right.parent = succ;
                 transplant(x, succ);
             }
-        } else if(x.left != null) {
+        } else if(!x.left.isNil) {
             transplant(x, x.left);
-        } else if(x.right != null) {
+        } else if(!x.right.isNil) {
             transplant(x, x.right);
         }
     }
