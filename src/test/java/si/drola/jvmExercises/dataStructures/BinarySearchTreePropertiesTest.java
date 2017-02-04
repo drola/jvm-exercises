@@ -27,6 +27,30 @@ public class BinarySearchTreePropertiesTest {
         assertBstWithValues(nodeValues, bst);
     }
 
+    @Property
+    public void validateDeletion(int[] nodeValues) {
+        if(nodeValues.length == 0) {
+            assertTrue(true);
+            return;
+        }
+
+
+        BinarySearchTree bst = new BinarySearchTree(null);
+        BinarySearchTree.Node last = null;
+        for (int i = 0; i < nodeValues.length; i++) {
+            last = new BinarySearchTree.Node(nodeValues[i], null, null);
+            bst.insert(last);
+        }
+
+        bst.delete(last);
+
+        nodeValues = Arrays.copyOfRange(nodeValues, 0, nodeValues.length - 1);
+        Arrays.sort(nodeValues);
+
+        assertValidBst(bst);
+        assertBstWithValues(nodeValues, bst);
+    }
+
     public static void assertBstWithValues(int[] expectedValues, BinarySearchTree t) {
         if(t.root == null && expectedValues.length == 0) {
             assertTrue(true);
