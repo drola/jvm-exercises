@@ -19,8 +19,6 @@ public class BinarySearchTreePropertiesTest {
         BinarySearchTree bst = new BinarySearchTree(null);
         for (int i = 0; i < nodeValues.length; i++) {
             bst.insert(new BinarySearchTree.Node(nodeValues[i], null, null));
-            System.out.println("Insert: ");
-            System.out.println(nodeValues[i]);
         }
 
         Arrays.sort(nodeValues);
@@ -30,12 +28,14 @@ public class BinarySearchTreePropertiesTest {
     }
 
     public static void assertBstWithValues(int[] expectedValues, BinarySearchTree t) {
+        if(t.root == null && expectedValues.length == 0) {
+            assertTrue(true);
+            return;
+        }
+
         LinkedList<Integer> result = new LinkedList<Integer>();
         t.walkInOrder((BinarySearchTree.Node node) -> {
-            //System.out.println(node.val);
             result.add(new Integer(node.val));
-            System.out.println("Walk: ");
-            System.out.println(node.val);
         });
 
         int[] result_ = ArrayUtils.toPrimitive(result.toArray(new Integer[result.size()]));
@@ -44,6 +44,11 @@ public class BinarySearchTreePropertiesTest {
     }
 
     public static void assertValidBst(BinarySearchTree t) {
+        if (t.root == null) {
+            assertTrue(true);
+            return;
+        }
+
         t.walkInOrder((BinarySearchTree.Node node) -> {
             if(node.left != null) {
                 assertEquals(node.left.parent, node);

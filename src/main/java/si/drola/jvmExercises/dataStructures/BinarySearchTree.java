@@ -36,27 +36,35 @@ public class BinarySearchTree {
 
     public void walkInOrder(Consumer<Node> c) {
         Node node = this.root;
-        while (node != null) {
-            if (node.left != null) {
-                node = node.left;
+
+        //Find minimum
+        while(node.left != null && node != null) {
+            node = node.left;
+        }
+        if(node != null) {
+            c.accept(node);
+        }
+
+        //Now iterate over all successors
+        while(node != null) {
+            if(node.right != null) {
+                //Minimum of node.right
+                node = node.right;
+                while(node.left != null) {
+                    node = node.left;
+                }
+                c.accept(node);
                 continue;
             }
-            c.accept(node);
 
-            while (node != null) {
-                if (node.parent == null) {
-                    node = null;
-                } else if (node.parent.left == node && node.parent.right != null) {
-                    c.accept(node.parent);
-                    node = node.parent.right;
-                    break;
-                } else if (node.parent.right == node) {
-                    node = node.parent;
-                } else if (node.parent.left == node && node.parent.right == null) {
-                    c.accept(node.parent);
-                    node = node.parent;
-                }
+            //Go up until we find a node where we didn't turn right
+            while(node.parent != null && node.parent.right == node) {
+                node = node.parent;
             }
+            if(node.parent != null) {
+                c.accept(node.parent);
+            }
+            node = node.parent;
         }
     }
 
