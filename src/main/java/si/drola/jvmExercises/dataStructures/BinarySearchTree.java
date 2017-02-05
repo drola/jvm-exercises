@@ -47,19 +47,19 @@ public class BinarySearchTree {
         Node node = this.root;
 
         //Find minimum
-        while(!node.isNil && !node.left.isNil) {
+        while (!node.isNil && !node.left.isNil) {
             node = node.left;
         }
-        if(!node.isNil) {
+        if (!node.isNil) {
             c.accept(node);
         }
 
         //Now iterate over all successors
-        while(node != null && !node.isNil) {
-            if(!node.right.isNil) {
+        while (node != null && !node.isNil) {
+            if (!node.right.isNil) {
                 //Minimum of node.right
                 node = node.right;
-                while(!node.left.isNil) {
+                while (!node.left.isNil) {
                     node = node.left;
                 }
                 c.accept(node);
@@ -67,10 +67,10 @@ public class BinarySearchTree {
             }
 
             //Go up until we find a node where we didn't turn right
-            while(node.parent != null && node.parent.right == node) {
+            while (node.parent != null && node.parent.right == node) {
                 node = node.parent;
             }
-            if(node.parent != null) {
+            if (node.parent != null) {
                 c.accept(node.parent);
             }
             node = node.parent;
@@ -80,7 +80,7 @@ public class BinarySearchTree {
     public Node search(int key) {
         Node node = this.root;
         while (!node.isNil && node.val != key) {
-            if(key > node.val) {
+            if (key > node.val) {
                 node = node.right;
             } else {
                 node = node.left;
@@ -112,10 +112,10 @@ public class BinarySearchTree {
     }
 
     public static Node successor(Node node) {
-        if(!node.right.isNil) {
+        if (!node.right.isNil) {
             return BinarySearchTree.min(node.right);
         }
-        while (node.parent != null && node.parent.right == node ) {
+        while (node.parent != null && node.parent.right == node) {
             node = node.parent;
         }
 
@@ -123,11 +123,11 @@ public class BinarySearchTree {
     }
 
     public static Node predecessor(Node node) {
-        if(!node.left.isNil) {
+        if (!node.left.isNil) {
             return BinarySearchTree.max(node.left);
         }
 
-        while(node.parent != null && node.parent.left == node) {
+        while (node.parent != null && node.parent.left == node) {
             node = node.parent;
         }
         return node.parent;
@@ -165,11 +165,11 @@ public class BinarySearchTree {
     protected void transplant(Node target, Node newNode) {
         newNode.parent = target.parent;
 
-        if(target.parent == null) {
+        if (target.parent == null) {
             this.root = newNode;
-        } else if(target.parent.left == target) {
+        } else if (target.parent.left == target) {
             target.parent.left = newNode;
-        } else if(target.parent.right == target) {
+        } else if (target.parent.right == target) {
             target.parent.right = newNode;
         }
     }
@@ -177,7 +177,7 @@ public class BinarySearchTree {
     public void delete(Node x) {
         if (x.left.isNil && x.right.isNil) {
             transplant(x, new Node());
-        } else if(!x.left.isNil && !x.right.isNil) {
+        } else if (!x.left.isNil && !x.right.isNil) {
             Node succ = BinarySearchTree.successor(x);
             if (x.right == succ) {
                 x.left.parent = x.right;
@@ -191,10 +191,34 @@ public class BinarySearchTree {
                 succ.right.parent = succ;
                 transplant(x, succ);
             }
-        } else if(!x.left.isNil) {
+        } else if (!x.left.isNil) {
             transplant(x, x.left);
-        } else if(!x.right.isNil) {
+        } else if (!x.right.isNil) {
             transplant(x, x.right);
         }
+    }
+
+    public void leftRotate(Node x) {
+        Node t = x.right;
+
+        x.right = t.left;
+        x.right.parent = x;
+
+        transplant(x, t);
+
+        t.left = x;
+        t.left.parent = t;
+    }
+
+    public void rightRotate(Node x) {
+        Node t = x.left;
+
+        x.left = t.right;
+        x.left.parent = x;
+
+        transplant(x, t);
+
+        t.right = x;
+        t.right.parent = t;
     }
 }

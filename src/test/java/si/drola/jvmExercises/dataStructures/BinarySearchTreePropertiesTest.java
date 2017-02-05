@@ -28,6 +28,58 @@ public class BinarySearchTreePropertiesTest {
     }
 
     @Property
+    public void validateRotationLeft(int[] nodeValues) {
+        if(nodeValues.length == 0) {
+            assertTrue(true);
+            return;
+        }
+
+        BinarySearchTree bst = new BinarySearchTree();
+        for (int i = 0; i < nodeValues.length; i++) {
+            bst.insert(new BinarySearchTree.Node(nodeValues[i]));
+        }
+
+        Arrays.sort(nodeValues);
+
+        if(bst.root != null && !bst.root.isNil && !bst.root.left.isNil && !bst.root.left.right.isNil) {
+            bst.leftRotate(bst.root.left);
+            assertValidBst(bst);
+            assertBstWithValues(nodeValues, bst);
+        }
+        if(bst.root != null && !bst.root.isNil && !bst.root.right.isNil) {
+            bst.leftRotate(bst.root);
+            assertValidBst(bst);
+            assertBstWithValues(nodeValues, bst);
+        }
+    }
+
+    @Property
+    public void validateRotationRight(int[] nodeValues) {
+        if(nodeValues.length == 0) {
+            assertTrue(true);
+            return;
+        }
+
+        BinarySearchTree bst = new BinarySearchTree();
+        for (int i = 0; i < nodeValues.length; i++) {
+            bst.insert(new BinarySearchTree.Node(nodeValues[i]));
+        }
+
+        Arrays.sort(nodeValues);
+
+        if(bst.root != null && !bst.root.isNil && !bst.root.right.isNil && !bst.root.right.left.isNil) {
+            bst.rightRotate(bst.root.right);
+            assertValidBst(bst);
+            assertBstWithValues(nodeValues, bst);
+        }
+        if(bst.root != null && !bst.root.isNil && !bst.root.left.isNil) {
+            bst.rightRotate(bst.root);
+            assertValidBst(bst);
+            assertBstWithValues(nodeValues, bst);
+        }
+    }
+
+    @Property
     public void validateDeletion(int[] nodeValues) {
         if(nodeValues.length == 0) {
             assertTrue(true);
