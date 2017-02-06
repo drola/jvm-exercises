@@ -139,5 +139,27 @@ public class BinarySearchTreePropertiesTest {
             }
         });
     }
+
+    public static void assertBalancedBst(BinarySearchTree t) {
+        if (t.root.isNil) {
+            assertTrue(true);
+            return;
+        }
+
+        t.walkInOrder((BinarySearchTree.Node node) -> {
+            int left = calculateHeight(node.left);
+            int right = calculateHeight(node.right);
+            assertTrue((left - right) <= 1);
+            assertTrue((left - right) >= -1);
+        });
+    }
+
+    public static int calculateHeight(BinarySearchTree.Node node) {
+        if (node == null || node.isNil) {
+            return -1;
+        } else {
+            return 1 + Math.max(calculateHeight(node.left), calculateHeight(node.right));
+        }
+    }
 }
 

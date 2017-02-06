@@ -21,6 +21,7 @@ public class RedBlackTreePropertiesTest {
 
         BinarySearchTreePropertiesTest.assertValidBst(bst);
         BinarySearchTreePropertiesTest.assertBstWithValues(nodeValues, bst);
+        BinarySearchTreePropertiesTest.assertBalancedBst(bst);
     }
 
     @Property
@@ -45,6 +46,7 @@ public class RedBlackTreePropertiesTest {
 
         BinarySearchTreePropertiesTest.assertValidBst(bst);
         BinarySearchTreePropertiesTest.assertBstWithValues(nodeValues, bst);
+        //BinarySearchTreePropertiesTest.assertBalancedBst(bst);
     }
 }
 
