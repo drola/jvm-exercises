@@ -12,21 +12,23 @@ import static org.junit.Assert.*;
 public class BinarySearchTreeTest {
     @Test
     public void insert() throws Exception {
-        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1);
-        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5);
-        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16);
-        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21);
-        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
-        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
-        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
-        BinarySearchTree t = new BinarySearchTree(n10);
+        SimpleBinarySearchTree t = new SimpleBinarySearchTree();
 
-        BinarySearchTree.Node n22 = new BinarySearchTree.Node(22);
+        SimpleBinarySearchTree.Node n1 = t.new Node(1);
+        SimpleBinarySearchTree.Node n5 = t.new Node(5);
+        SimpleBinarySearchTree.Node n16 = t.new Node(16);
+        SimpleBinarySearchTree.Node n21 = t.new Node(21);
+        SimpleBinarySearchTree.Node n4 = t.new Node(4, n1, n5);
+        SimpleBinarySearchTree.Node n17 = t.new Node(17, n16, n21);
+        SimpleBinarySearchTree.Node n10 = t.new Node(10, n4, n17);
+        t.insert(n10);
+
+        SimpleBinarySearchTree.Node n22 = t.new Node(22);
         t.insert(n22);
         assertEquals(n21, n22.parent);
         assertTrue(n21.right == n22);
 
-        BinarySearchTree.Node n6 = new BinarySearchTree.Node(6);
+        SimpleBinarySearchTree.Node n6 = t.new Node(6);
         t.insert(n6);
         assertEquals(n5, n6.parent);
         assertTrue(n5.right == n6);
@@ -34,80 +36,91 @@ public class BinarySearchTreeTest {
 
     @Test
     public void predecessor() throws Exception {
-        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1);
-        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5);
-        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16);
-        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21);
-        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
-        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
-        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
+        SimpleBinarySearchTree t = new SimpleBinarySearchTree();
 
-        assertEquals(null, BinarySearchTree.predecessor(n1));
-        assertEquals(n1, BinarySearchTree.predecessor(n4));
-        assertEquals(n4, BinarySearchTree.predecessor(n5));
-        assertEquals(n5, BinarySearchTree.predecessor(n10));
-        assertEquals(n10, BinarySearchTree.predecessor(n16));
-        assertEquals(n16, BinarySearchTree.predecessor(n17));
-        assertEquals(n17, BinarySearchTree.predecessor(n21));
+        SimpleBinarySearchTree.Node n1 = t.new Node(1);
+        SimpleBinarySearchTree.Node n5 = t.new Node(5);
+        SimpleBinarySearchTree.Node n16 = t.new Node(16);
+        SimpleBinarySearchTree.Node n21 = t.new Node(21);
+        SimpleBinarySearchTree.Node n4 = t.new Node(4, n1, n5);
+        SimpleBinarySearchTree.Node n17 = t.new Node(17, n16, n21);
+        SimpleBinarySearchTree.Node n10 = t.new Node(10, n4, n17);
+
+        assertEquals(null, SimpleBinarySearchTree.predecessor(n1));
+        assertEquals(n1, SimpleBinarySearchTree.predecessor(n4));
+        assertEquals(n4, SimpleBinarySearchTree.predecessor(n5));
+        assertEquals(n5, SimpleBinarySearchTree.predecessor(n10));
+        assertEquals(n10, SimpleBinarySearchTree.predecessor(n16));
+        assertEquals(n16, SimpleBinarySearchTree.predecessor(n17));
+        assertEquals(n17, SimpleBinarySearchTree.predecessor(n21));
     }
 
     @Test
     public void successor() throws Exception {
-        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1);
-        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5);
-        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16);
-        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21);
-        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
-        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
-        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
+        SimpleBinarySearchTree t = new SimpleBinarySearchTree();
 
-        assertEquals(n4, BinarySearchTree.successor(n1));
-        assertEquals(n5, BinarySearchTree.successor(n4));
-        assertEquals(n10, BinarySearchTree.successor(n5));
-        assertEquals(n16, BinarySearchTree.successor(n10));
-        assertEquals(n17, BinarySearchTree.successor(n16));
-        assertEquals(n21, BinarySearchTree.successor(n17));
-        assertEquals(null, BinarySearchTree.successor(n21));
+
+        SimpleBinarySearchTree.Node n1 = t.new Node(1);
+        SimpleBinarySearchTree.Node n5 = t.new Node(5);
+        SimpleBinarySearchTree.Node n16 = t.new Node(16);
+        SimpleBinarySearchTree.Node n21 = t.new Node(21);
+        SimpleBinarySearchTree.Node n4 = t.new Node(4, n1, n5);
+        SimpleBinarySearchTree.Node n17 = t.new Node(17, n16, n21);
+        SimpleBinarySearchTree.Node n10 = t.new Node(10, n4, n17);
+
+        assertEquals(n4, SimpleBinarySearchTree.successor(n1));
+        assertEquals(n5, SimpleBinarySearchTree.successor(n4));
+        assertEquals(n10, SimpleBinarySearchTree.successor(n5));
+        assertEquals(n16, SimpleBinarySearchTree.successor(n10));
+        assertEquals(n17, SimpleBinarySearchTree.successor(n16));
+        assertEquals(n21, SimpleBinarySearchTree.successor(n17));
+        assertEquals(null, SimpleBinarySearchTree.successor(n21));
     }
 
     @Test
     public void min() throws Exception {
-        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1);
-        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5);
-        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16);
-        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21);
-        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
-        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
-        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
-        BinarySearchTree t = new BinarySearchTree(n10);
+        SimpleBinarySearchTree t = new SimpleBinarySearchTree();
+
+        SimpleBinarySearchTree.Node n1 = t.new Node(1);
+        SimpleBinarySearchTree.Node n5 = t.new Node(5);
+        SimpleBinarySearchTree.Node n16 = t.new Node(16);
+        SimpleBinarySearchTree.Node n21 = t.new Node(21);
+        SimpleBinarySearchTree.Node n4 = t.new Node(4, n1, n5);
+        SimpleBinarySearchTree.Node n17 = t.new Node(17, n16, n21);
+        SimpleBinarySearchTree.Node n10 = t.new Node(10, n4, n17);
+        t.insert(n10);
 
         assertEquals(n1, t.min());
     }
 
     @Test
     public void max() throws Exception {
-        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1);
-        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5);
-        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16);
-        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21);
-        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
-        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
-        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
-        BinarySearchTree t = new BinarySearchTree(n10);
+        SimpleBinarySearchTree t = new SimpleBinarySearchTree();
+
+        SimpleBinarySearchTree.Node n1 = t.new Node(1);
+        SimpleBinarySearchTree.Node n5 = t.new Node(5);
+        SimpleBinarySearchTree.Node n16 = t.new Node(16);
+        SimpleBinarySearchTree.Node n21 = t.new Node(21);
+        SimpleBinarySearchTree.Node n4 = t.new Node(4, n1, n5);
+        SimpleBinarySearchTree.Node n17 = t.new Node(17, n16, n21);
+        SimpleBinarySearchTree.Node n10 = t.new Node(10, n4, n17);
+        t.insert(n10);
 
         assertEquals(n21, t.max());
     }
 
     @Test
     public void search() throws Exception {
-        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1);
-        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5);
-        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16);
-        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21);
-        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
-        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
-        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
-        BinarySearchTree t = new BinarySearchTree(n10);
+        SimpleBinarySearchTree t = new SimpleBinarySearchTree();
+
+        SimpleBinarySearchTree.Node n1 = t.new Node(1);
+        SimpleBinarySearchTree.Node n5 = t.new Node(5);
+        SimpleBinarySearchTree.Node n16 = t.new Node(16);
+        SimpleBinarySearchTree.Node n21 = t.new Node(21);
+        SimpleBinarySearchTree.Node n4 = t.new Node(4, n1, n5);
+        SimpleBinarySearchTree.Node n17 = t.new Node(17, n16, n21);
+        SimpleBinarySearchTree.Node n10 = t.new Node(10, n4, n17);
+        t.insert(n10);
 
         assertEquals(n1, t.search(1));
         assertEquals(n21, t.search(21));
@@ -117,19 +130,21 @@ public class BinarySearchTreeTest {
 
     @Test
     public void walkInOrder() throws Exception {
+        SimpleBinarySearchTree t = new SimpleBinarySearchTree();
+
         int[] expected = new int[]{1,4,5,10,16,17,21};
         LinkedList<Integer> result = new LinkedList<Integer>();
 
-        BinarySearchTree.Node n1 = new BinarySearchTree.Node(1);
-        BinarySearchTree.Node n5 = new BinarySearchTree.Node(5);
-        BinarySearchTree.Node n16 = new BinarySearchTree.Node(16);
-        BinarySearchTree.Node n21 = new BinarySearchTree.Node(21);
-        BinarySearchTree.Node n4 = new BinarySearchTree.Node(4, n1, n5);
-        BinarySearchTree.Node n17 = new BinarySearchTree.Node(17, n16, n21);
-        BinarySearchTree.Node n10 = new BinarySearchTree.Node(10, n4, n17);
-        BinarySearchTree t = new BinarySearchTree(n10);
+        SimpleBinarySearchTree.Node n1 = t.new Node(1);
+        SimpleBinarySearchTree.Node n5 = t.new Node(5);
+        SimpleBinarySearchTree.Node n16 = t.new Node(16);
+        SimpleBinarySearchTree.Node n21 = t.new Node(21);
+        SimpleBinarySearchTree.Node n4 = t.new Node(4, n1, n5);
+        SimpleBinarySearchTree.Node n17 = t.new Node(17, n16, n21);
+        SimpleBinarySearchTree.Node n10 = t.new Node(10, n4, n17);
+        t.insert(n10);
 
-        t.walkInOrder((BinarySearchTree.Node node) -> {
+        t.walkInOrder((SimpleBinarySearchTree.Node node) -> {
             //System.out.println(node.val);
             result.add(new Integer(node.val));
         });

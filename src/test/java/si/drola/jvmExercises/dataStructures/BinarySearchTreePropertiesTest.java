@@ -8,17 +8,15 @@ import org.junit.runner.RunWith;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(JUnitQuickcheck.class)
 public class BinarySearchTreePropertiesTest {
     @Property
     public void validateCreation(int[] nodeValues) {
-        BinarySearchTree bst = new BinarySearchTree();
+        SimpleBinarySearchTree bst = new SimpleBinarySearchTree();
         for (int i = 0; i < nodeValues.length; i++) {
-            bst.insert(new BinarySearchTree.Node(nodeValues[i]));
+            bst.insert(bst.new Node(nodeValues[i]));
         }
 
         Arrays.sort(nodeValues);
@@ -34,9 +32,9 @@ public class BinarySearchTreePropertiesTest {
             return;
         }
 
-        BinarySearchTree bst = new BinarySearchTree();
+        SimpleBinarySearchTree bst = new SimpleBinarySearchTree();
         for (int i = 0; i < nodeValues.length; i++) {
-            bst.insert(new BinarySearchTree.Node(nodeValues[i]));
+            bst.insert(bst.new Node(nodeValues[i]));
         }
 
         Arrays.sort(nodeValues);
@@ -60,9 +58,9 @@ public class BinarySearchTreePropertiesTest {
             return;
         }
 
-        BinarySearchTree bst = new BinarySearchTree();
+        SimpleBinarySearchTree bst = new SimpleBinarySearchTree();
         for (int i = 0; i < nodeValues.length; i++) {
-            bst.insert(new BinarySearchTree.Node(nodeValues[i]));
+            bst.insert(bst.new Node(nodeValues[i]));
         }
 
         Arrays.sort(nodeValues);
@@ -87,10 +85,10 @@ public class BinarySearchTreePropertiesTest {
         }
 
 
-        BinarySearchTree bst = new BinarySearchTree();
-        BinarySearchTree.Node last = null;
+        SimpleBinarySearchTree bst = new SimpleBinarySearchTree();
+        SimpleBinarySearchTree.Node last = null;
         for (int i = 0; i < nodeValues.length; i++) {
-            last = new BinarySearchTree.Node(nodeValues[i]);
+            last = bst.new Node(nodeValues[i]);
             bst.insert(last);
         }
 
@@ -103,14 +101,14 @@ public class BinarySearchTreePropertiesTest {
         assertBstWithValues(nodeValues, bst);
     }
 
-    public static void assertBstWithValues(int[] expectedValues, BinarySearchTree t) {
-        if(t.root.isNil && expectedValues.length == 0) {
+    public static <TTreeNode extends BinarySearchTree.Node<TTreeNode>> void assertBstWithValues(int[] expectedValues, BinarySearchTree<TTreeNode> t) {
+        if (t.root.isNil && expectedValues.length == 0) {
             assertTrue(true);
             return;
         }
 
         LinkedList<Integer> result = new LinkedList<Integer>();
-        t.walkInOrder((BinarySearchTree.Node node) -> {
+        t.walkInOrder((TTreeNode node) -> {
             result.add(new Integer(node.val));
         });
 
@@ -119,13 +117,13 @@ public class BinarySearchTreePropertiesTest {
         assertArrayEquals(expectedValues, result_);
     }
 
-    public static void assertValidBst(BinarySearchTree t) {
+    public static <TTreeNode extends BinarySearchTree.Node<TTreeNode>> void assertValidBst(BinarySearchTree<TTreeNode> t) {
         if (t.root.isNil) {
             assertTrue(true);
             return;
         }
 
-        t.walkInOrder((BinarySearchTree.Node node) -> {
+        t.walkInOrder((TTreeNode node) -> {
             if(!node.left.isNil) {
                 assertEquals(node.left.parent, node);
                 assertTrue(node.left.val <= node.val);
@@ -134,29 +132,15 @@ public class BinarySearchTreePropertiesTest {
                 assertEquals(node.right.parent, node);
                 assertTrue(node.right.val >= node.val);
             }
-            if(node.parent != null) {
+            if(node.parent != null && node != t.root) {
                 assertTrue(node.parent.left == node || node.parent.right == node);
             }
         });
     }
 
-    public static void assertBalancedBst(BinarySearchTree t) {
-        if (t.root.isNil) {
-            assertTrue(true);
-            return;
-        }
-
-        t.walkInOrder((BinarySearchTree.Node node) -> {
-            int left = calculateHeight(node.left);
-            int right = calculateHeight(node.right);
-            assertTrue((left - right) <= 1);
-            assertTrue((left - right) >= -1);
-        });
-    }
-
-    public static int calculateHeight(BinarySearchTree.Node node) {
+    public static <TTreeNode extends BinarySearchTree.Node<TTreeNode>> int calculateHeight(TTreeNode node) {
         if (node == null || node.isNil) {
-            return -1;
+            return 0;
         } else {
             return 1 + Math.max(calculateHeight(node.left), calculateHeight(node.right));
         }

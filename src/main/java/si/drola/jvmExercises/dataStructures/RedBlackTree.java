@@ -2,67 +2,70 @@ package si.drola.jvmExercises.dataStructures;
 
 import com.sun.org.apache.regexp.internal.RE;
 
-public class RedBlackTree extends BinarySearchTree {
+public class RedBlackTree extends BinarySearchTree<RedBlackTree.Node> {
     public enum Color {
         RED,
         BLACK
     }
 
-    public static class Node extends BinarySearchTree.Node {
-        Color color = Color.BLACK;
-        public Node parent, left, right;
+    @Override
+    protected RedBlackTree.Node newNode() {
+        return new RedBlackTree.Node();
+    }
 
-        public Node(int val, Node left, Node right) {
-            super(val, left, right);
-            this.right = (Node) super.right;
-            this.left = (Node) super.left;
-            this.right.parent = this;
+    public class Node extends BinarySearchTree.Node<RedBlackTree.Node> {
+        Color color = Color.BLACK;
+
+        public Node(int val, RedBlackTree.Node left, RedBlackTree.Node right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+            this.isNil = false;
+
             this.left.parent = this;
+            this.right.parent = this;
         }
 
         public Node(int val) {
-            this(val, new Node(), new Node());
+            this(val, new RedBlackTree.Node(), new RedBlackTree.Node());
         }
 
         public Node() {
-            super();
+            this.isNil = true;
         }
+
 
         @Override
         public String toString() {
-            return String.format("(%s, %d)", color == Color.RED ? "red" : "black", val);
+            return isNil ? "NIL" : String.format("(%s, %d)", color == Color.RED ? "red" : "black", val);
         }
     }
 
-    public Node root;
 
+    public RedBlackTree(RedBlackTree.Node root) {
+        this.root = root;
+    }
 
-
+    public RedBlackTree() {
+        this.root = this.newNode();
+    }
 
     public void delete(Node x) {
         super.delete(x);
 
-        //TODO: It appers subclassing the tree this way is not optimal.
-        if(super.root == null) {
-            this.root = null;
-        } else {
-            this.root = (Node) super.root;
-        }
 
         //Fix colors
     }
 
     public void insert(Node x) {
         super.insert(x);
-        //TODO: It appers subclassing the tree this way is not optimal.
-        this.root = (Node) super.root;
-        x.color = Color.RED;
 
+        x.color = Color.RED;
 
         //Fixup of red-black tree properties
         while(x.parent != null && x.parent.color == Color.RED && x.parent.parent != null) {
             if (x.parent == x.parent.parent.left) {
-                Node y = x.parent.parent.left;
+                Node y = x.parent.parent.right;
                 if(y.color == Color.RED) {
                     x.parent.color = Color.BLACK;
                     y.color = Color.BLACK;
@@ -78,7 +81,7 @@ public class RedBlackTree extends BinarySearchTree {
                     rightRotate(x.parent.parent);
                 }
             } else {
-                Node y = x.parent.parent.right;
+                Node y = x.parent.parent.left;
                 if(y.color == Color.RED) {
                     x.parent.color = Color.BLACK;
                     y.color = Color.BLACK;
@@ -95,6 +98,7 @@ public class RedBlackTree extends BinarySearchTree {
                 }
             }
         }
+
         root.color = Color.BLACK;
     }
 }

@@ -14,14 +14,14 @@ public class RedBlackTreePropertiesTest {
     public void validateCreation(int[] nodeValues) {
         RedBlackTree bst = new RedBlackTree();
         for (int i = 0; i < nodeValues.length; i++) {
-            bst.insert(new RedBlackTree.Node(nodeValues[i]));
+            bst.insert(bst.new Node(nodeValues[i]));
         }
 
         Arrays.sort(nodeValues);
 
         BinarySearchTreePropertiesTest.assertValidBst(bst);
         BinarySearchTreePropertiesTest.assertBstWithValues(nodeValues, bst);
-        BinarySearchTreePropertiesTest.assertBalancedBst(bst);
+        RedBlackTreePropertiesTest.assertBalancedBst(bst);
     }
 
     @Property
@@ -35,7 +35,7 @@ public class RedBlackTreePropertiesTest {
         RedBlackTree bst = new RedBlackTree();
         RedBlackTree.Node last = null;
         for (int i = 0; i < nodeValues.length; i++) {
-            last = new RedBlackTree.Node(nodeValues[i]);
+            last = bst.new Node(nodeValues[i]);
             bst.insert(last);
         }
 
@@ -47,6 +47,22 @@ public class RedBlackTreePropertiesTest {
         BinarySearchTreePropertiesTest.assertValidBst(bst);
         BinarySearchTreePropertiesTest.assertBstWithValues(nodeValues, bst);
         //BinarySearchTreePropertiesTest.assertBalancedBst(bst);
+    }
+
+    public static void assertBalancedBst(RedBlackTree t) {
+        if (t.root.isNil) {
+            assertTrue(true);
+            return;
+        }
+
+        t.walkInOrder((RedBlackTree.Node node) -> {
+            int left = BinarySearchTreePropertiesTest.calculateHeight(node.left);
+            int right = BinarySearchTreePropertiesTest.calculateHeight(node.right);
+            int tolerance = Math.max(2, Math.min(left, right) * 2);
+
+            assertTrue(String.format("Node %s is balanced (%d, %d)", node.toString(), left, right), (left - right) <= tolerance);
+            assertTrue(String.format("Node %s is balanced (%d, %d)", node.toString(), left, right), (left - right) >= (-1*tolerance));
+        });
     }
 }
 
